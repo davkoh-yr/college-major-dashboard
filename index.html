@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Major Choice Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Student-Facing Dashboard</p>
+          <h1>Compare college majors by pay and in-person career pathways.</h1>
+          <p class="hero-text">
+            This view combines Census PSEO earnings and employment-flow data with BLS telework rates
+            to estimate how in-person the jobs tied to each major tend to be five years after graduation.
+          </p>
+        </div>
+        <div class="hero-note">
+          <p class="note-label">Index logic</p>
+          <p class="note-value">In-personness = weighted average of industry in-person shares</p>
+          <p class="note-foot">Higher values mean the major more often feeds into industries with less telework.</p>
+        </div>
+      </header>
+
+      <section class="controls">
+        <label class="search-field">
+          <span>Search majors</span>
+          <input id="major-search" type="search" placeholder="Computer, health, psychology..." />
+        </label>
+
+        <label class="range-field">
+          <span>Minimum in-personness</span>
+          <input id="inperson-filter" type="range" min="0" max="100" value="0" />
+          <strong id="inperson-filter-value">0%</strong>
+        </label>
+
+        <label class="sort-field">
+          <span>Sort majors</span>
+          <select id="sort-select">
+            <option value="earnings">Highest earnings</option>
+            <option value="inperson">Most in-person</option>
+            <option value="balance">Balanced sweet spot</option>
+            <option value="name">Alphabetical</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="stats" id="stats-strip"></section>
+
+      <section class="viz-panel">
+        <div class="panel-header">
+          <div>
+            <p class="panel-kicker">Scatterplot</p>
+            <h2>Earnings vs. in-personness by major</h2>
+          </div>
+          <p id="scatter-caption" class="panel-caption"></p>
+        </div>
+        <svg id="scatterplot" viewBox="0 0 900 520" role="img" aria-label="Scatterplot of earnings versus in-personness by major"></svg>
+      </section>
+
+      <section class="bottom-grid">
+        <div class="table-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-kicker">Compare Majors</p>
+              <h2>Ranked major list</h2>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Major</th>
+                  <th>Year-5 earnings</th>
+                  <th>In-personness</th>
+                  <th>Top industry</th>
+                </tr>
+              </thead>
+              <tbody id="majors-table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="detail-panel" id="detail-panel">
+          <p class="panel-kicker">Major Detail</p>
+          <h2>Loading data...</h2>
+          <p class="detail-placeholder">The dashboard is pulling data from Census PSEO and using a BLS telework crosswalk.</p>
+        </aside>
+      </section>
+
+      <footer class="footer">
+        <p id="methodology"></p>
+        <p id="sources"></p>
+      </footer>
+    </div>
+
+    <script src="dashboard-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
